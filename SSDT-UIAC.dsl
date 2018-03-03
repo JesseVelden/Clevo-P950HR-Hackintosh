@@ -1,5 +1,5 @@
 // SSDT-UIAC.dsl
-// For Clevo P950HR (MOET USB C NOG TESTEN!!!!!)
+// For Clevo P950HR
 
 DefinitionBlock ("", "SSDT", 2, "hack", "UIAC-ALL", 0)
 {
@@ -63,13 +63,10 @@ DefinitionBlock ("", "SSDT", 2, "hack", "UIAC-ALL", 0)
             },
         })
     }
-}
 
-// USB power properties via USBX device
-// See TonyMacX Guide USB Power property injection
-// Luckily our Embedded Controller already is named EC! (Around 27165 in DSDT.dsl)
-DefinitionBlock("", "SSDT", 2, "hack", "USBX", 0)
-{
+    // USB power properties via USBX device
+    // See TonyMacX Guide USB Power property injection
+    // Luckily our Embedded Controller already is named EC! (Around 27165 in DSDT.dsl)
     Device(_SB.USBX)
     {
         Name(_ADR, 0)
@@ -87,4 +84,3 @@ DefinitionBlock("", "SSDT", 2, "hack", "USBX", 0)
         }
     }
 }
-//EOF

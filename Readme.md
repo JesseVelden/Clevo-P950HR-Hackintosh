@@ -30,6 +30,10 @@ And use the `config_HD615_620....plist`
 * Use with Clover [config.plist](https://github.com/RehabMan/OS-X-USB-Inject-All/blob/master/config_patches.plist) patch for 15 > 26 devices.
 * Or use my own SSDT  `SSDT-UIIAC.dsl` and compile to `ASL`!!!!! (Using MaciASL/ iasl tool) and paste in `EFI > Clover > ACPI > Patched` for more than 15 devices. Or use the precompiled `SSDT-UIAC.aml` should wok fine instead of compiling yourself.
 
+## USBInjectAll.kext
+USB 3.1/ USB C works out of the box.
+* `SSDT-UIAC.dsl` > `SSDT-UIAC.aml` for USBInjectAll.kext
+
 ## Mount EFI partition
 Wanneer je weer opnieuw de USB stick aansluit zal die niet automatisch de EFI partitie weergeven:
 * `diskutil list`  
@@ -39,7 +43,7 @@ Wanneer je weer opnieuw de USB stick aansluit zal die niet automatisch de EFI pa
 # Mac OS Installation
 * F2 > Boot > Set the USB in the uppermost position.
 * Save
-* Boot into the Installer and follow the instructions below: 
+* Boot into the Installer and follow the instructions below:
 ## Initialize SSD/HD
 * Go to the terminal and enter:
 * `diskutil list` note your SSD/HD (disk0 for example)
@@ -117,6 +121,14 @@ Bladieblad wordt continued
 ### Clover config.plist
 * See added file
 #### Clover explanations for the original Rehabman thing
+* `DisabledAML`: These default config.plist settings can be used for Native PowerManagement.
+* `DSDT` > `Fixes` (zie ook Rehabman Clover 2017-10-26 changes)
+* * `FixHeaders(_20000000)`: Enabled: NO, not needed! The purpose of FixHeaders_20000000 is to solve the problem of non-ASCII characters in various ACPI table headers (ie. MATS, BGRT, etc).
+* * `FixTMR(_40000000)`: Enabled: NO, not needed !Disable TMR device in DSDT.
+* * `FixRTC(_20000000)`: Enabled NO, not needed! Exclude IRQ(0) from RTC device, maar wij hebben IRQ(8).
+* * `FixIPIC(_0040)` Enabled: NO, **I think** it is not needed. Deletes IRQ(2) from device IPIC. Helps with a non working Power button.
+* * `FixHPET_0010`: Enabled: NO, Add IRQ(0, 8, 11) to device HPET. Obligatory for OSX <=10.8. But I see Mavericks can work without it.
+
 * `Change OSID to XSID` can be deleted as we don't have OSID
 * `change _OSI to XOSI` enable this as this will rename to Darwin but add from
 https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch
@@ -133,6 +145,11 @@ https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch
 https://github.com/toleda/audio_ALCInjection/tree/master/ssdt_hdef en download
 SSDT-hdef-3-100-hdas and place in `Clover > ACPI > Patched`.
 
+
+# DSDT Changes
+* Removed an error line, otherwise it wouldn't compile. Already removed in
+Google Drive Repo.
+* `Fix _WAK Arg0 v2`
 
 
 ## Laterr
