@@ -149,7 +149,7 @@ SSDT-hdef-3-100-hdas and place in `Clover > ACPI > Patched`.
 # DSDT Changes
 * Removed an error line, otherwise it wouldn't compile. Already removed in
 Google Drive Repo.
-* `Fix _WAK Arg0 v2`
+* `Fix _WAK Arg0 v2`+ HPET + SMBUS + IRQ + RTC + Mutex + PNOT + PRW (0x6D) Skylake version
 
 
 ## Laterr
