@@ -273,7 +273,7 @@
 			<key>Intel</key>
 			<true/>
 			<key>NVidia</key>
-			<true/>
+			<false/>
 		</dict>
 	</dict>
 	<key>KernelAndKextPatches</key>

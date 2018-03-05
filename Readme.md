@@ -158,6 +158,7 @@ om NVIDIA te disablen. Daarna kan je de [webdrivers installeren](https://www.ton
 </dict>
 ```
 * `change _DSM to XDSM`  **Nodig? Alleen wanneer je _DSM methode aanpast?** Ja enable, want dit is nodig voor SSDT-DiscreteSpoof, wanneer je NVIDIA niet wil enablen, maar geen Clover config.plist patcches wil. Dit kan uit worden gezet als NVIDIA weer werkt!
+* `Graphics > Inject > NVIDIA`: false, otherwise you don't get 8GB of VRAM.
 ##### Overig
 * `DisabledAML`: These default config.plist settings can be used for Native PowerManagement.
 * `DSDT` > `Fixes` (zie ook Rehabman Clover 2017-10-26 changes)
