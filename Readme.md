@@ -11,7 +11,7 @@ Gebasseerd op Rehabman: https://www.tonymacx86.com/threads/guide-booting-the-os-
 
 * `./clover_setup.sh`
 * Volg de instructies: https://www.tonymacx86.com/threads/guide-booting-the-os-x-installer-on-laptops-with-clover.148093/ met Clover UEFI
-* De benodigde files en kexts vind je in de `clover` map.
+* De benodigde files en kexts vind je in de `clover` map. See below for needed kexts explantion, but make also sure you are up to date with the latest information.
 * Use the ACPI folder including disabling NVIDIA and paste it in the ACPI > Patched
 folder on your USB.
 
