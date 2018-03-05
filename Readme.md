@@ -102,8 +102,7 @@ Bladieblad wordt continued
 - select "Customize" (the default is a legacy install -- we need to change it)
 - check "Install for UEFI booting only", will automatically select
 - check "BGM" from Themes (the config.plist files I provide use this theme)
-- check "OsxAptioFixDrv-64" from Drivers64UEFI
-- check "EmuVariableUefi-64.efi"
+- check "AptioMemoryFix.efi" from Drivers64UEFI (en NIET: OsxAptioFixDrv-64, EmuVariableUefi-64)
 - select "Install RC scripts on target volume" and/or "Install all RC scripts on all other boot volumes"
 ### Kexts for Clover on HD/SSD (kexts voor updates etc.)
 * FakeSMC.kext
