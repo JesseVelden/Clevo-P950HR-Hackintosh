@@ -23,12 +23,15 @@ Go in `EFI > Clover > Kexts > Other`
 * * `FakePCIID_XHCIMux`
 * * `FakePCIID_Broadcom_WiFi`
 * [VoodooPS2Controller](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller)
+* [Lilu.kext]
+* [IntelGraphicFixup.kext]
 
 ## Config.plist
 See in: https://github.com/RehabMan/OS-X-Clover-Laptop-Config
 And use the `config_HD615_620....plist`
 * Use with Clover [config.plist](https://github.com/RehabMan/OS-X-USB-Inject-All/blob/master/config_patches.plist) patch for 15 > 26 devices.
-* Or use my own SSDT  `SSDT-UIIAC.dsl` and compile to `ASL`!!!!! (Using MaciASL/ iasl tool) and paste in `EFI > Clover > ACPI > Patched` for more than 15 devices. Or use the precompiled `SSDT-UIAC.aml` should wok fine instead of compiling yourself.
+* Or use my own SSDT  `SSDT-UIIAC.dsl` and compile to `ASL`!!!!! (Using MaciASL/ iasl tool) and paste in `EFI > Clover > ACPI > Patched` for more than 15 devices. Or use the precompiled `SSDT-UIAC.aml` should wok fine instead of compiling yourself!!!!!
+* Zie beneden voor de config.plist verantwoording
 
 ## USBInjectAll.kext
 USB 3.1/ USB C works out of the box.
@@ -52,7 +55,9 @@ Wanneer je weer opnieuw de USB stick aansluit zal die niet automatisch de EFI pa
 * MacOS: 250GB APFS
 * Windows: Mac OS Extended (Journaled) IMPORTANT: DON'T USE FAT!!​
 * Nu kan je naar de Installer en het Installeren op de zojuist aangemaakte disk!
-* Reboot several times maar dan wel de goeie disk selecteren in Clover!!
+* Belangrijk is dat je geen APFS maar lekker ouderwets HFS gaat gebruiken. Omdat dat zorgt voor betere boottijden. In de terminal enter:
+* `/Volumes/"Image Volume/Install macOS High Sierra.app"/Contents/Resources/startosinstall --volume the_target_volume --converttoapfs NO --agreetolicense` Zie ook [deze thread](https://www.tonymacx86.com/threads/guide-avoid-apfs-conversion-on-high-sierra-update-or-fresh-install.232855/)
+* Reboot several times maar dan wel de goeie disk ("Boot macOS Install from ...") selecteren in Clover!!
 
 # After install
 * Kies de juiste dingens in Clover en press F2, en F4 voor DSDT dingens.
@@ -60,26 +65,15 @@ Wanneer je weer opnieuw de USB stick aansluit zal die niet automatisch de EFI pa
 ## DSDT en SSDT patchen
 * Download [MaciASL](https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads/)
 
-* [`Building the latest iasl from github:`](https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/)
-
-* * `mkdir -p ~/Projects && cd ~/Projects`
-* * `git clone https://github.com/RehabMan/Intel-iasl.git iasl.git`
-* * `cd iasl.git`
-* * `make`
-* * `sudo make install` will place it in /usr/bin
-* * `sudo cp /usr/bin/iasl /Applications/MaciASL.app/Contents/MacOS/iasl61`
+* Gebruik de guide.git (Probook)
 
 
 ### Power management
-* SSDT: [`XPCM only:`](https://www.tonymacx86.com/threads/guide-native-power-management-for-laptops.175801/)
-* * `curl -o ./SSDT-PluginType1.dsl https://raw.githubusercontent.com/RehabMan/OS-X-Clover-Laptop-Config/master/hotpatch/SSDT-PluginType1.dsl`
-* * `iasl SSDT-PluginType1.dsl`
-* * `rm /Volumes/EFI/EFI/Clover/ACP.................I/patched/SSDT.aml`
-* * `cp SSDT-PluginType1.aml /Volumes/EFI/EFI/Clover/ACPI/patched/SSDT-PluginType1.aml`
+* Werkt natively by inserting `config.plist/ACPI/SSDT/Generate/PluginType=true`
 
 ### Brightness
 * [Klik](https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightinjector-kext.218222/)
-en zie hieronder voor de kext instructies.
+en zie hieronder voor de kext instructies. Already included in the ACPI folder.
 ### General
 Bladieblad wordt continued
 
@@ -106,21 +100,42 @@ Bladieblad wordt continued
 * **Customize location and options:**
 - using "Change Install Location"
 - select "Customize" (the default is a legacy install -- we need to change it)
-- check "Install for UEFI booting only", "Install Clover in the ESP" will automatically select
+- check "Install for UEFI booting only", will automatically select
 - check "BGM" from Themes (the config.plist files I provide use this theme)
 - check "OsxAptioFixDrv-64" from Drivers64UEFI
 - check "EmuVariableUefi-64.efi"
 - select "Install RC scripts on target volume" and/or "Install all RC scripts on all other boot volumes"
-- most systems will work without DataHubDxe-64.efi, but some may require it
 ### Kexts for Clover on HD/SSD (kexts voor updates etc.)
 * FakeSMC.kext
 * USBInjectAll.kext
 * VoodooPS2Controller.kext
-* Misschien nog FakePCIID, maar niet echt nodig omdat het al in /Library/Extensions zit
+* RealtekRTL8111.kext
+* FakePCIID met FakePCIID_Broadcom_WiFi
+* Lilu
+* IntelGraphicFixup
 
 ### Clover config.plist
 * See added file
 #### Clover explanations for the original Rehabman thing
+##### NVIDIA
+* Doe een diff, met de config.plist van rehabman. Hieronder staan waarom dingen
+wel of niet zijn geinclude.
+* `Devices > AddProperties > NVIDIA`, haal dit allemaal weg. Dit hebben we juist nodig.
+, tijdens installeren gebruik je de gecompilde SSDT-DiscreteSpoof.aml. Zie de foler: `ACPI > Disable NVIDIA`
+om NVIDIA te disablen. Daarna kan je de [webdrivers installeren](https://www.tonymacx86.com/nvidia-drivers/) waarbij je dit invoegt:
+```xml
+<key>SystemParameters</key>
+<dict>
+    <key>InjectKexts</key>
+    <string>Detect</string>
+    <key>InjectSystemID</key>
+    <true/>
+    <key>NvidiaWeb</key>
+    <true/>
+</dict>
+```
+* `change _DSM to XDSM`  **Nodig? Alleen wanneer je _DSM methode aanpast?** Ja enable, want dit is nodig voor SSDT-DiscreteSpoof, wanneer je NVIDIA niet wil enablen, maar geen Clover config.plist patcches wil. Dit kan uit worden gezet als NVIDIA weer werkt!
+##### Overig
 * `DisabledAML`: These default config.plist settings can be used for Native PowerManagement.
 * `DSDT` > `Fixes` (zie ook Rehabman Clover 2017-10-26 changes)
 * * `FixHeaders(_20000000)`: Enabled: NO, not needed! The purpose of FixHeaders_20000000 is to solve the problem of non-ASCII characters in various ACPI table headers (ie. MATS, BGRT, etc).
@@ -134,7 +149,7 @@ Bladieblad wordt continued
 https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch
 `SSDT-XOSI.dsl` --> `SSDT-XOSI.aml` to `Clover > ACPI > Patched`
 * `change ECDV to EC`/ `change EC0 to EC`/ `change H_EC to EC`: disable cause our DSDT already uses `EC` for the embedded controller
-* `change _DSM to XDSM`  **Nodig? Alleen wanneer je _DSM methode aanpast?**
+
 * `change HECI to IMEI` yes,
 * `change MEI to IMEI` nope,
 * `change HDAS to HDEF` nope, we will rename the audio with toleda shit.
