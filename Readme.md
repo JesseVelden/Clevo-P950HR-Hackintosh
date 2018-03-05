@@ -12,7 +12,44 @@ Gebasseerd op Rehabman: https://www.tonymacx86.com/threads/guide-booting-the-os-
 * `./clover_setup.sh`
 * Volg de instructies: https://www.tonymacx86.com/threads/guide-booting-the-os-x-installer-on-laptops-with-clover.148093/ met Clover UEFI
 * De benodigde files en kexts vind je in de `clover` map.
+* Use the ACPI folder including disabling NVIDIA and paste it in the ACPI > Patched
+folder on your USB.
 
+## Quick install guide
+* F2 at boot > Change boot order to usb.
+* Boot into MacOS install from install_osx
+
+  ## Mac OS Installation
+* F2 > Boot > Set the USB in the uppermost position.
+* Save
+* Boot into the Installer and follow the instructions below:
+  ### Initialize SSD/HD
+* Go to the terminal and enter:
+* `diskutil list` note your SSD/HD (disk0 for example)
+* `diskutil partitionDisk /dev/disk0 GPT JHFS+ "MacOS" R`
+* Nu kan je naar Diskutility en het repartitioneren
+* MacOS: 250GB APFS
+* Windows: Mac OS Extended (Journaled) IMPORTANT: DON'T USE FAT!!​
+
+  ### Installeren
+* Nu kan je naar de Installer en het Installeren op de zojuist aangemaakte disk!
+* Belangrijk is dat je geen APFS maar lekker ouderwets HFS gaat gebruiken. Omdat dat zorgt voor betere boottijden, aangezien TRIM nogal langzaam is met APFS. Zie ook [deze thread](https://www.tonymacx86.com/threads/guide-avoid-apfs-conversion-on-high-sierra-update-or-fresh-install.232855/)
+* In de terminal enter:
+* `/Volumes/"Image Volume/Install macOS High Sierra.app"/Contents/Resources/startosinstall --volume /volumes/the_target_volume --converttoapfs NO --agreetolicense`
+* Reboot several times maar dan wel de goeie disk ("Boot macOS Install from ...") selecteren in Clover!!
+   ### After Install
+* Download this repository again.
+* Use `./download.sh`, and then `./install_downloads.sh`.
+* Install Clover again on the SSD/ HDD. See below.
+* Make sure you copy APFS.efi and HFSPlus.efi, into Drivers64UEFI. See also [the clover install thread](https://www.tonymacx86.com/threads/guide-booting-the-os-x-installer-on-laptops-with-clover.148093/)
+* Copy the ACPI files, but not the disabling NVIDIA one.
+* Copy our config.plist file.
+* Download the NVidia web drivers: https://www.tonymacx86.com/nvidia-drivers/
+and see also [this forum thread](https://www.tonymacx86.com/forums/graphics.13/) and search for the right NVIDIA thread. You can try several versions of the same Mac OS version if one is not working and saying that you need another version.
+
+
+
+# Explanations
 ## Kexts
 Go in `EFI > Clover > Kexts > Other`
 * [FakeSMC.kext](https://github.com/RehabMan/OS-X-FakeSMC-kozlek)
@@ -27,11 +64,11 @@ Go in `EFI > Clover > Kexts > Other`
 * [IntelGraphicFixup.kext]
 
 ## Config.plist
-See in: https://github.com/RehabMan/OS-X-Clover-Laptop-Config
+Gebruik onze eigen maar compare met een diff-tool:
+See in: https://github.com/RehabMan/OS-X-Clover-Laptop-Config. Zie beneden voor de config.plist verantwoording
 And use the `config_HD615_620....plist`
 * Use with Clover [config.plist](https://github.com/RehabMan/OS-X-USB-Inject-All/blob/master/config_patches.plist) patch for 15 > 26 devices.
 * Or use my own SSDT  `SSDT-UIIAC.dsl` and compile to `ASL`!!!!! (Using MaciASL/ iasl tool) and paste in `EFI > Clover > ACPI > Patched` for more than 15 devices. Or use the precompiled `SSDT-UIAC.aml` should wok fine instead of compiling yourself!!!!!
-* Zie beneden voor de config.plist verantwoording
 
 ## USBInjectAll.kext
 USB 3.1/ USB C works out of the box.
@@ -43,21 +80,7 @@ Wanneer je weer opnieuw de USB stick aansluit zal die niet automatisch de EFI pa
 * `diskutil mount /dev/diskXXX`
 
 
-# Mac OS Installation
-* F2 > Boot > Set the USB in the uppermost position.
-* Save
-* Boot into the Installer and follow the instructions below:
-## Initialize SSD/HD
-* Go to the terminal and enter:
-* `diskutil list` note your SSD/HD (disk0 for example)
-* `diskutil partitionDisk /dev/disk0 GPT JHFS+ "MacOS" R`
-* Nu kan je naar Diskutility en het repartitioneren
-* MacOS: 250GB APFS
-* Windows: Mac OS Extended (Journaled) IMPORTANT: DON'T USE FAT!!​
-* Nu kan je naar de Installer en het Installeren op de zojuist aangemaakte disk!
-* Belangrijk is dat je geen APFS maar lekker ouderwets HFS gaat gebruiken. Omdat dat zorgt voor betere boottijden. In de terminal enter:
-* `/Volumes/"Image Volume/Install macOS High Sierra.app"/Contents/Resources/startosinstall --volume /volumes/the_target_volume --converttoapfs NO --agreetolicense` Zie ook [deze thread](https://www.tonymacx86.com/threads/guide-avoid-apfs-conversion-on-high-sierra-update-or-fresh-install.232855/)
-* Reboot several times maar dan wel de goeie disk ("Boot macOS Install from ...") selecteren in Clover!!
+
 
 # After install
 * Kies de juiste dingens in Clover en press F2, en F4 voor DSDT dingens.
@@ -69,7 +92,8 @@ Wanneer je weer opnieuw de USB stick aansluit zal die niet automatisch de EFI pa
 
 
 ### Power management
-* Werkt natively by inserting `config.plist/ACPI/SSDT/Generate/PluginType=true`
+* Werkt natively by inserting `config.plist/ACPI/SSDT/Generate/PluginType=true`.
+[Zie ook](https://www.tonymacx86.com/threads/guide-native-power-management-for-laptops.175801/) XPCM Method, Clover.
 
 ### Brightness
 * [Klik](https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightinjector-kext.218222/)
@@ -121,7 +145,7 @@ Bladieblad wordt continued
 wel of niet zijn geinclude.
 * `Devices > AddProperties > NVIDIA`, haal dit allemaal weg. Dit hebben we juist nodig.
 , tijdens installeren gebruik je de gecompilde SSDT-DiscreteSpoof.aml. Zie de foler: `ACPI > Disable NVIDIA`
-om NVIDIA te disablen. Daarna kan je de [webdrivers installeren](https://www.tonymacx86.com/nvidia-drivers/) waarbij je dit invoegt:
+om NVIDIA te disablen. Daarna kan je de [webdrivers installeren](https://www.tonymacx86.com/nvidia-drivers/) waarbij je dit invoegt bij config.plist:
 ```xml
 <key>SystemParameters</key>
 <dict>
