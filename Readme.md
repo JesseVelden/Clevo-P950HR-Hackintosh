@@ -56,7 +56,7 @@ Wanneer je weer opnieuw de USB stick aansluit zal die niet automatisch de EFI pa
 * Windows: Mac OS Extended (Journaled) IMPORTANT: DON'T USE FAT!!​
 * Nu kan je naar de Installer en het Installeren op de zojuist aangemaakte disk!
 * Belangrijk is dat je geen APFS maar lekker ouderwets HFS gaat gebruiken. Omdat dat zorgt voor betere boottijden. In de terminal enter:
-* `/Volumes/"Image Volume/Install macOS High Sierra.app"/Contents/Resources/startosinstall --volume the_target_volume --converttoapfs NO --agreetolicense` Zie ook [deze thread](https://www.tonymacx86.com/threads/guide-avoid-apfs-conversion-on-high-sierra-update-or-fresh-install.232855/)
+* `/Volumes/"Image Volume/Install macOS High Sierra.app"/Contents/Resources/startosinstall --volume /volumes/the_target_volume --converttoapfs NO --agreetolicense` Zie ook [deze thread](https://www.tonymacx86.com/threads/guide-avoid-apfs-conversion-on-high-sierra-update-or-fresh-install.232855/)
 * Reboot several times maar dan wel de goeie disk ("Boot macOS Install from ...") selecteren in Clover!!
 
 # After install
