@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>HDAConfigDefault</key>
+	<array>
+		<dict>
+			<key>#AFGLowPowerState</key>
+			<data>AwAAAA==</data>
+			<key>Codec</key>
+			<string>Megacookie - Realtek ALC1220</string>
+			<key>CodecID</key>
+			<integer>283906592</integer>
+			<key>ConfigData</key>
+			<data>AUccEAFHHRABRx4hAUcfAQEnHCABJx0AAScepgEnH5ABhxwwAYcdEAGHHoEBhx8BAbccQAG3HQABtx4XAbcfkA==</data>
+			<key>FuncGroup</key>
+			<integer>1</integer>
+			<key>LayoutID</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleGetInfoString</key>
+	<string>0.9.0, Copyright(GPLv2) 2016 RehabMan. All rights reserved.</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.rehabman.injector.AppleHDAHCD</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>AppleHDAHCD</string>
+	<key>CFBundlePackageType</key>
+	<string>KEXT</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.9.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>0.9.0</string>
+	<key>IOKitPersonalities</key>
+	<dict>
+		<key>HDA Hardware Config Resource</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleHDAHardwareConfigDriver</string>
+			<key>HDAConfigDefault</key>
+			<array>
+				<dict>
+					<key>#AFGLowPowerState</key>
+					<data>
+					AwAAAA==
+					</data>
+					<key>Codec</key>
+					<string>Megacookie - Realtek ALC1220</string>
+					<key>CodecID</key>
+					<integer>283906592</integer>
+					<key>ConfigData</key>
+					<data>
+					AUccEAFHHRABRx4hAUcfAQEnHCABJx0AASce
+					pgEnH5ABhxwwAYcdEAGHHoEBhx8BAbccQAG3
+					HQABtx4XAbcfkA==
+					</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>3</integer>
+				</dict>
+			</array>
+			<key>IOClass</key>
+			<string>AppleHDAHardwareConfigDriver</string>
+			<key>IOMatchCategory</key>
+			<string>AppleHDAHardwareConfigDriver</string>
+			<key>IOProbeScore</key>
+			<integer>2000</integer>
+			<key>IOProviderClass</key>
+			<string>AppleHDAHardwareConfigDriverLoader</string>
+		</dict>
+	</dict>
+	<key>NSHumanReadableCopyright</key>
+	<string>AppleHDAHCD_ALC1220 0.9.0. Copyright 2016(GPLv2) RehabMan. All rights reserved.</string>
+</dict>
+</plist>

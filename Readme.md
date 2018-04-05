@@ -140,6 +140,7 @@ Bladieblad wordt continued
 ### Clover config.plist
 * See added file
 #### Clover explanations for the original Rehabman thing
+
 ##### NVIDIA
 * Doe een diff, met de config.plist van rehabman. Hieronder staan waarom dingen
 wel of niet zijn geinclude.
@@ -167,6 +168,7 @@ om NVIDIA te disablen. Daarna kan je de [webdrivers installeren](https://www.ton
 * * `FixRTC(_20000000)`: Enabled NO, not needed! Exclude IRQ(0) from RTC device, maar wij hebben IRQ(8).
 * * `FixIPIC(_0040)` Enabled: NO, **I think** it is not needed. Deletes IRQ(2) from device IPIC. Helps with a non working Power button.
 * * `FixHPET_0010`: Enabled: NO, Add IRQ(0, 8, 11) to device HPET. Obligatory for OSX <=10.8. But I see Mavericks can work without it.
+* * `FixHDA`: Enabled: YES
 
 * `Change OSID to XSID` can be deleted as we don't have OSID
 * `change _OSI to XOSI` enable this as this will rename to Darwin but add from
@@ -176,13 +178,30 @@ https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch
 
 * `change HECI to IMEI` yes,
 * `change MEI to IMEI` nope,
-* `change HDAS to HDEF` nope, we will rename the audio with toleda shit.
+* `change HDAS to HDEF` YES, we will rename the audio with toleda shit.
 * `change GFX0 to IGPU` prima, misschien later aanpassen
 * `change PCI0.VID to IGPU #1 (Thinkpad)` remove en die andere ook
 
 #### Audio
-https://github.com/toleda/audio_ALCInjection/tree/master/ssdt_hdef en download
-SSDT-hdef-3-100-hdas and place in `Clover > ACPI > Patched`.
+See also my posts in: https://www.insanelymac.com/forum/forums/topic/311293-applealc-—-dynamic-applehda-patching/?page=83
+* `Devices> AddProperties > Audio > Inject > 13:
+```
+...
+<key>Devices</key>
+<dict>
+    <key>AddProperties</key>
+        <array>
+        </array>
+        <key>Audio</key>
+        <dict>
+            <key>Inject</key>
+            <integer>13</integer>
+        </dict>
+        ...
+```
+
+# Boot gibberish before Clover loads:
+https://www.insanelymac.com/forum/forums/topic/327584-apfsefi-without-verbose-boot/?page=5
 
 
 # DSDT Changes
@@ -194,4 +213,3 @@ Google Drive Repo.
 ## Laterr
 * EmuVariableUefi64!
 Controleer met patches en hotpatch!!!
-* Geluid
