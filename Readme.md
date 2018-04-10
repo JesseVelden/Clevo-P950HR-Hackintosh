@@ -209,7 +209,10 @@ https://www.insanelymac.com/forum/forums/topic/327584-apfsefi-without-verbose-bo
 Google Drive Repo.
 * `Fix _WAK Arg0 v2`+ HPET + SMBUS + IRQ + RTC + Mutex + PNOT + PRW (0x6D) Skylake version
 
-
+# Linux stuff
+https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx You need the:
+'Broadcom STA Wireless driver (Proprietary)'
+Or see https://wiki.archlinux.org/index.php/Dell_XPS_13_%289343%29 > Wifi
 ## Laterr
 * EmuVariableUefi64!
 Controleer met patches en hotpatch!!!
