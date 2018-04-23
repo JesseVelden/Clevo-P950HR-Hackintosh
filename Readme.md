@@ -160,6 +160,13 @@ om NVIDIA te disablen. Daarna kan je de [webdrivers installeren](https://www.ton
 ```
 * `change _DSM to XDSM`  **Nodig? Alleen wanneer je _DSM methode aanpast?** Ja enable, want dit is nodig voor SSDT-DiscreteSpoof, wanneer je NVIDIA niet wil enablen, maar geen Clover config.plist patcches wil. Dit kan uit worden gezet als NVIDIA weer werkt!
 * `Graphics > Inject > NVIDIA`: false, otherwise you don't get 8GB of VRAM.
+* Daarna volg deze guide:
+https://www.tonymacx86.com/threads/macos-native-discrete-gpu-power-management.247479/  
+In Clover.plist:
+* Zorg er voor dat de `Nvidia GPU PM- Rename PEGP to GFX2` DSDT Patch NA `change GFX0 to IGPU` komt! in `config.plist/ACPI/DSDT/Patches/`
+* `SMBIOS > ProductName`:  `MacBookPro14,3`
+* Er is al een geconfigureerde dAGPM.kext van de  `MacBookPro14,3` gemaakt!
+
 ##### Overig
 * `DisabledAML`: These default config.plist settings can be used for Native PowerManagement.
 * `DSDT` > `Fixes` (zie ook Rehabman Clover 2017-10-26 changes)
@@ -181,6 +188,7 @@ https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch
 * `change HDAS to HDEF` YES, we will rename the audio with toleda shit.
 * `change GFX0 to IGPU` prima, misschien later aanpassen
 * `change PCI0.VID to IGPU #1 (Thinkpad)` remove en die andere ook
+
 
 #### Audio
 See also my posts in: https://www.insanelymac.com/forum/forums/topic/311293-applealc-—-dynamic-applehda-patching/?page=83
