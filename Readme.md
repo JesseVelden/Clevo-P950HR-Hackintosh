@@ -164,8 +164,6 @@ om NVIDIA te disablen. Daarna kan je de [webdrivers installeren](https://www.ton
 https://www.tonymacx86.com/threads/macos-native-discrete-gpu-power-management.247479/  
 In Clover.plist:
 * Zorg er voor dat de `Nvidia GPU PM- Rename PEGP to GFX2` DSDT Patch NA `change GFX0 to IGPU` komt! in `config.plist/ACPI/DSDT/Patches/`
-* `SMBIOS > ProductName`:  `MacBookPro14,3`
-* Er is al een geconfigureerde dAGPM.kext van de  `MacBookPro14,3` gemaakt!
 
 ##### Overig
 * `DisabledAML`: These default config.plist settings can be used for Native PowerManagement.
@@ -217,10 +215,14 @@ https://www.insanelymac.com/forum/forums/topic/327584-apfsefi-without-verbose-bo
 Google Drive Repo.
 * `Fix _WAK Arg0 v2`+ HPET + SMBUS + IRQ + RTC + Mutex + PNOT + PRW (0x6D) Skylake version
 
+
+# Fan control
+We're using: https://github.com/datasone/ClevoControl/releases
+With the self-made starttup script: moe.datasone.clevocontrol.plist in `/Library/LaunchAgents/` and `sudo launchctl load /Library/LaunchAgents/moe.datasone.clevocontrol.plist` and the `ClevoKBFanControl` in `/Users/jesse`.
+See also my fork and branch for the DSDT fixes. I need to document it more...  
+`--auto` seems fine.
+
 # Linux stuff
 https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx You need the:
 'Broadcom STA Wireless driver (Proprietary)'
 Or see https://wiki.archlinux.org/index.php/Dell_XPS_13_%289343%29 > Wifi
-## Laterr
-* EmuVariableUefi64!
-Controleer met patches en hotpatch!!!
