@@ -7,7 +7,7 @@ TAG=`pwd`/tools/tag
 SLE=/System/Library/Extensions
 LE=/Library/Extensions
 EXCEPTIONS="Sensors|FakePCIID_BCM57XX|FakePCIID_AR9280|FakePCIID_Intel_GbX|FakePCIID_XHCIMux|BrcmPatchRAM|BrcmBluetoothInjector|BrcmFirmwareData|BrcmNonPatchRAM|FakePCIID_Intel_HDMI_Audio|CodecCommander"
-ESSENTIAL="FakeSMC.kext FakePCIID.kext FakePCIID_Broadcom_WiFi.kext RealtekRTL8111.kext USBInjectAll.kext Lilu.kext IntelGraphicsFixup.kext AppleBacklightInjector.kext VoodooPS2Controller.kext"
+ESSENTIAL="FakeSMC.kext FakePCIID.kext FakePCIID_Broadcom_WiFi.kext RealtekRTL8111.kext USBInjectAll.kext AppleBacklightInjector.kext VoodooPS2Controller.kext"
 
 # extract minor version (eg. 10.9 vs. 10.10 vs. 10.11)
 MINOR_VER=$([[ "$(sw_vers -productVersion)" =~ [0-9]+\.([0-9]+) ]] && echo ${BASH_REMATCH[1]})

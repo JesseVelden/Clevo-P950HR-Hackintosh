@@ -6,7 +6,7 @@
    <string>moe.datasone.clevocontrol.ctl</string>
    <key>ProgramArguments</key>
    <array>
-     <string>/Users/jesse/ClevoKBFanControl</string>
+     <string>/usr/local/bin/ClevoKBFanControl</string>
      <string>--auto</string>
      <string>--light=OFF</string>
    </array>

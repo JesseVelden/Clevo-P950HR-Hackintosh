@@ -61,7 +61,7 @@ Go in `EFI > Clover > Kexts > Other`
 * * `FakePCIID_Broadcom_WiFi`
 * [VoodooPS2Controller](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller)
 * [Lilu.kext]
-* [IntelGraphicFixup.kext]
+* [WhatEverGreen.kext]
 
 ## Config.plist
 Gebruik onze eigen maar compare met een diff-tool:
@@ -115,8 +115,8 @@ Bladieblad wordt continued
 * * FakePCIID_Broadcom_WiFi.kext (met onze leuke BCM94352Z (Dell DW ))
 * [`USBInjectAll.kext`](https://github.com/RehabMan/OS-X-USB-Inject-All)
 * [`ACPIBatteryManager.kext `](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) DSDT patches zijn bij deze laptop niet nodig omdat alles in EC al binnen 8 bits valt. [Zie ook Rehabman's thread als je jezelf niet vertrouwt](https://www.tonymacx86.com/threads/guide-how-to-patch-dsdt-for-working-battery-status.116102/)
-* [Lilu.kext](https://bitbucket.org/RehabMan/lilu/downloads/) voor boot garbage
-*  [IntelGraphicFixup.kext](https://bitbucket.org/RehabMan/intelgraphicsfixup/downloads/) Voor boot garbage
+* [Lilu.kext](https://github.com/acidanthera/Lilu) voor boot garbage
+*  [WhateverGreen.kext](https://github.com/acidanthera/WhateverGreen) Voor boot garbage
 * [RealtekRTL8111.kext](https://github.com/RehabMan/OS-X-Realtek-Network)
 
 ## [Installeer Clover op SSD/HD](https://www.tonymacx86.com/threads/guide-booting-the-os-x-installer-on-laptops-with-clover.148093/)
@@ -134,8 +134,8 @@ Bladieblad wordt continued
 * VoodooPS2Controller.kext
 * RealtekRTL8111.kext
 * FakePCIID met FakePCIID_Broadcom_WiFi
-* Lilu
-* IntelGraphicFixup
+* Lilu.kext
+* WhatEverGreen.kext
 
 ### Clover config.plist
 * See added file
@@ -218,7 +218,7 @@ Google Drive Repo.
 
 # Fan control
 We're using: https://github.com/datasone/ClevoControl/releases
-With the self-made starttup script: moe.datasone.clevocontrol.plist in `/Library/LaunchAgents/` and `sudo launchctl load /Library/LaunchAgents/moe.datasone.clevocontrol.plist` and the `ClevoKBFanControl` in `/Users/jesse`.
+With the self-made starttup script: moe.datasone.clevocontrol.plist in `/Library/LaunchAgents/` and `sudo launchctl load /Library/LaunchAgents/moe.datasone.clevocontrol.plist` and the `ClevoKBFanControl` in `/usr/local/bin`.
 See also my fork and branch for the DSDT fixes. I need to document it more...  
 `--auto` seems fine.
 

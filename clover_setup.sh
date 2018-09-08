@@ -1,6 +1,6 @@
 #!/bin/bash
 #set -x
-ESSENTIAL="FakeSMC.kext FakePCIID.kext FakePCIID_Broadcom_WiFi.kext RealtekRTL8111.kext USBInjectAll.kext Lilu.kext IntelGraphicsFixup.kext AppleBacklightInjector.kext VoodooPS2Controller.kext"
+ESSENTIAL="FakeSMC.kext FakePCIID.kext FakePCIID_Broadcom_WiFi.kext RealtekRTL8111.kext USBInjectAll.kext AppleBacklightInjector.kext VoodooPS2Controller.kext"
 
 function download()
 {
