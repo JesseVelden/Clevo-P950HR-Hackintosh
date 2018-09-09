@@ -206,6 +206,19 @@ See also my posts in: https://www.insanelymac.com/forum/forums/topic/311293-appl
         ...
 ```
 
+#### HDMI Audio
+Doesn't work :P, NVIDIA only supports DP Audio with the NVIDIA web drivers:
+https://forums.geforce.com/default/topic/1021693/geforce-apple-gpus/please-enable-hdmi-audio-in-pascal-drivers/post/5281859/#5281859  
+https://www.insanelymac.com/forum/topic/323307-audio-over-hdmi-on-gtx-1060/
+
+Therefore only DP audio works. If it doesn't see:  
+https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.GeForce.en.md  
+(Look for the code between ** ** in PEG0)
+
+This would become for our laptops: `Store (One, ^PEGP.NHDA)` in Device (PEG0).  
+Besides there is a SSDT-HDAU.aml which might be neededs.
+
+
 # Boot gibberish before Clover loads:
 https://www.insanelymac.com/forum/forums/topic/327584-apfsefi-without-verbose-boot/?page=5
 

@@ -4153,6 +4153,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                 Name (_ADR, 0x00010000)  // _ADR: Address
                 Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
                 {
+                    Store (One, ^PEGP.NHDA)
                     If (PICM)
                     {
                         Return (AR01)
