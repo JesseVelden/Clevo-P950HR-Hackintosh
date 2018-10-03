@@ -130,7 +130,7 @@
 	<key>Boot</key>
 	<dict>
 		<key>Arguments</key>
-		<string>kext-dev-mode=1 dart=0 -disablegfxfirmware</string>
+		<string>kext-dev-mode=1 dart=0 -disablegfxfirmware -cdfon</string>
 		<key>DefaultVolume</key>
 		<string>LastBootedVolume</string>
 		<key>NeverHibernate</key>
@@ -155,6 +155,26 @@
 			<string>To avoid automatic Clover fake device-id (Skylake) injection</string>
 			<key>IntelGFX</key>
 			<string>0x59168086</string>
+		</dict>
+		<key>Properties</key>
+		<dict>
+			<key>PciRoot(0)/Pci(0x02,0)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AAAbGQ==</data>
+				<key>device-id</key>
+				<data>FhkAAA==</data>
+				<key>#hda-gfx</key>
+				<data>b25ib2FyZC0xAA==</data>
+				<key># DVMT-prealloc</key>
+				<string>32MB BIOS, 19MB framebuffer, 9MB cursor bytes (credit RehabMan)</string>
+				<key>framebuffer-patch-enable</key>
+				<integer>1</integer>
+				<key>framebuffer-stolenmem</key>
+				<data>AAAwAQ==</data>
+				<key>framebuffer-fbmem</key>
+				<data>AACQAA==</data>
+			</dict>
 		</dict>
 		<key>USB</key>
 		<dict>
@@ -225,7 +245,7 @@
 			<false/>
 		</dict>
 		<key>ig-platform-id</key>
-		<string>0x591b0000</string>
+		<string>0x191b0000</string>
 		<key>Inject</key>
 		<dict>
 			<key>ATI</key>
@@ -249,7 +269,6 @@
 		<key>ForceKextsToLoad</key>
 		<array>
 			<string>\System\Library\Extensions\IONetworkingFamily.kext</string>
-			<string>\System\Library\Extensions\AppleIntelKBLGraphicsFramebuffer.kext</string>
 		</array>
 		<key>KextsToPatch</key>
 		<array>
@@ -296,18 +315,6 @@
 				<data>AAAwAQAAkAA=</data>
 			</dict>
 			<dict>
-				<key>Comment</key>
-				<string>0x591b0000, 0105 instead of 0306, HDMI</string>
-				<key>Disabled</key>
-				<true/>
-				<key>Name</key>
-				<string>com.apple.driver.AppleIntelKBLGraphicsFramebuffer</string>
-				<key>Find</key>
-				<data>AgQKAAAIAACHAQAAAwYKAAAEAACHAQAA/wAAAAEAAAAgAAAA</data>
-				<key>Replace</key>
-				<data>AQUKAAAIAACHAQAAAgQKAAAIAACHAQAA/wAAAAEAAAAgAAAA</data>
-			</dict>
-			<dict>
 				<key>Disabled</key>
 				<true/>
 				<key>Comment</key>
@@ -326,6 +333,16 @@
 		<array>
 			<dict>
 				<key>Comment</key>
+				<string>Disable panic kext logging on 10.13 release kernel (credit Vandroiy)</string>
+				<key>MatchOS</key>
+				<string>10.13.x</string>
+				<key>Find</key>
+				<data>igKEwHRE</data>
+				<key>Replace</key>
+				<data>igKEwOtE</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>MSR 0xE2 _xcpm_idle instant reboot(c) Pike R. Alpha</string>
 				<key>Disabled</key>
 				<false/>
@@ -333,6 +350,16 @@
 				<data>ILniAAAADzA=</data>
 				<key>Replace</key>
 				<data>ILniAAAAkJA=</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Disable panic kext logging on 10.14 release kernel (credit Vandroiy)</string>
+				<key>MatchOS</key>
+				<string>10.14.x</string>
+				<key>Find</key>
+				<data>igKEwHRC</data>
+				<key>Replace</key>
+				<data>igKEwOtC</data>
 			</dict>
 		</array>
 	</dict>
@@ -345,8 +372,14 @@
 	</dict>
 	<key>SMBIOS</key>
 	<dict>
+		<key>BoardSerialNumber</key>
+		<string>C02713303GUFF4G1H</string>
 		<key>ProductName</key>
 		<string>MacBookPro14,1</string>
+		<key>SerialNumber</key>
+		<string>C02TH20DHV29</string>
+		<key>SmUUID</key>
+		<string>98855D41-C1F7-4F3D-8167-B2975C2A21CD</string>
 		<key>Trust</key>
 		<true/>
 	</dict>

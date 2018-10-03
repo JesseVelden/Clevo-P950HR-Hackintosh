@@ -1,17 +1,48 @@
-Updated: Jan 2018
-
-Gebasseerd op Rehabman: https://www.tonymacx86.com/threads/guide-booting-the-os-x-installer-on-laptops-with-clover.148093/
+Based on the guide of Rehabman: https://www.tonymacx86.com/threads/guide-booting-the-os-x-installer-on-laptops-with-clover.148093/
 
 # General information
-* F2 is Bios   
-* F7 is select boot device
-* Clear NVRam: `Fn + D + Powerrr` (niet aangesloten aan netstroom) -voor missende batterijstatussen.
+* F2 to Bios setup   
+* F7 to select boot device
+* Clear NVRam (for example missing battery states): `Fn + D + Powerrr` (not connected to power supply)
+
+
+# Big upgrades:
+* Follow the instructions at the [forum thread of Rehabman](https://www.tonymacx86.com/threads/guide-booting-the-os-x-installer-on-laptops-with-clover.148093/)
+* Add the recommended kexts to the USB
+* Add your own preferred kexts to the USB (from HDD/ SSD EFI to USB EFI)
+* Backup your working config.plist of your SSD EFI
+* Diff it with the config.plist from rehabman (use the 620 version, with ig-platform-id from the spoof version) **THIS IS IMPORTANT, OTHERWISE YOU WILL GET A BLACK SCREEN FROM MOJAVE ONWARDS:**
+```xml
+<key>Properties</key>
+<dict>
+  <key>PciRoot(0)/Pci(0x02,0)</key>
+  <dict>
+    <key>AAPL,ig-platform-id</key>
+    <data>AAAbGQ==</data>
+    <key>device-id</key>
+    <data>FhkAAA==</data>
+    ...
+```
+
+* Update your own Clover on the SSD
+* Use the updated config.plist and try to boot.
+* Update kexts system wide. So in EFI and /Library/Extensions
+```sh
+sudo cp -r ...kext /Library/Extensions
+sudo kextchache -i / # And check for error output
+```
+* When this works, copy also the new config.plist, ACPI > Patched, themes to the EFI USB.
+* Try to boot to your normal desktop from the USB.
+* If that works set USB as boot default in setup (F2)
+* Bootup the installer.
+* Profit! All added kexts should be working after a couple reboots.
+
 
 # Prepare USB installer
 
-* `./clover_setup.sh`
-* Volg de instructies: https://www.tonymacx86.com/threads/guide-booting-the-os-x-installer-on-laptops-with-clover.148093/ met Clover UEFI
-* De benodigde files en kexts vind je in de `clover` map. See below for needed kexts explantion, but make also sure you are up to date with the latest information.
+* `./clover_setup.sh` (DON'T USE NEEDS TO BE UPDATED)
+* Follow the instructions at: https://www.tonymacx86.com/threads/guide-booting-the-os-x-installer-on-laptops-with-clover.148093/ met Clover UEFI
+* De benodigde files en kexts vind je in de `clover` map. See below for needed kexts explanation, but make also sure you are up to date with the latest information.
 * Use the ACPI folder including disabling NVIDIA and paste it in the ACPI > Patched
 folder on your USB.
 
@@ -34,8 +65,6 @@ folder on your USB.
   ### Installeren
 * Nu kan je naar de Installer en het Installeren op de zojuist aangemaakte disk!
 * Belangrijk is dat je geen APFS maar lekker ouderwets HFS gaat gebruiken. Omdat dat zorgt voor betere boottijden, aangezien TRIM nogal langzaam is met APFS. Zie ook [deze thread](https://www.tonymacx86.com/threads/guide-avoid-apfs-conversion-on-high-sierra-update-or-fresh-install.232855/)
-* In de terminal enter:
-* `/Volumes/"Image Volume/Install macOS High Sierra.app"/Contents/Resources/startosinstall --volume /volumes/the_target_volume --converttoapfs NO --agreetolicense`
 * Reboot several times maar dan wel de goeie disk ("Boot macOS Install from ...") selecteren in Clover!!
    ### After Install
 * Download this repository again.
